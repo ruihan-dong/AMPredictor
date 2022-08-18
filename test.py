@@ -91,7 +91,5 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=TEST_BATCH_SIZE, shuffle=False, collate_fn=collate)
 
     Y, P = predicting(model, device, test_loader)
-    print("Y:", Y)
-    print("P:", P)
     calculate_metrics(Y, P)
     plot_density(Y, P)
