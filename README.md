@@ -22,7 +22,7 @@ sklearn
 
 ## Usage for prediction
 
-###### 01 Prepare input files (./input/)
+### 01 Prepare input files (./input/)
 
 * input.fasta  # the fasta file of input peptide sequences
 * input.txt  # name/sequence/label, the label can be any number when predicting unknown MICs
@@ -34,7 +34,7 @@ Two simple scripts can help you to transform these two input files when there is
 * fasta2txt.py (Biopython required)
 * txt2fasta.py
 
-###### 02 Preprocess
+### 02 Preprocess
 
 The first step is to transform a peptide into ESM embedding and its contact map.
 
@@ -46,7 +46,7 @@ python preprocess.py
 
 The pretrained ESM-1b model would be downloaded automatically the first time operating, which may takes a long time. 
 
-###### 03 Run predicting
+### 03 Run predicting
 
 ```python
 python predict.py
@@ -60,19 +60,19 @@ Note: If the input file name need to be changed, please edit AMPredictor.py.
 
 ## Usage for training
 
-###### 01 Prepare input files and preprocess
+### 01 Prepare input files and preprocess
 
 This preparation step is same as mentioned above. 
 
 The AMP datasets we used for training, validation and testing are in ./data folder.
 
-###### 02 Run training
+### 02 Run training
 
 ```python
 python train.py
 ```
 
-###### 03 Run testing
+### 03 Run testing
 
 ```python
 python test.py
