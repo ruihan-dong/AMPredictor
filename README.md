@@ -24,19 +24,19 @@ sklearn
 
 ### 01 Prepare input files (./input/)
 
-* input.fasta  # the fasta file of input peptide sequences
-* input.txt  # name/sequence/label, the label can be any number when predicting unknown MICs
+* input.fasta   # the fasta file of input peptide sequences
+* input.txt   # name/sequence/label, the label can be any number when predicting unknown MICs
 
-Please carefully check the name of each sequence in input.fasta is consistent with that in input.txt, otherwise the predicted results will be wrong.
+Please carefully check that the name of each sequence in input.fasta is consistent with which in input.txt, otherwise the predicted results will be wrong.
 
-Two simple scripts can help you to transform these two input files when there is one of them:
+Two simple scripts can help you to transform these two input files when one of them is available:
 
 * fasta2txt.py (Biopython required)
 * txt2fasta.py
 
 ### 02 Preprocess
 
-The first step is to transform a peptide into ESM embedding and its contact map.
+The first step is to transform a peptide sequence into ESM embedding and obtain its contact map.
 
 The input of this script is input.fasta
 
@@ -44,7 +44,7 @@ The input of this script is input.fasta
 python preprocess.py
 ```
 
-The pretrained ESM-1b model would be downloaded automatically the first time operating, which may takes a long time. 
+The pretrained ESM-1b model would be downloaded automatically the first time operating, which may take a long time. 
 
 ### 03 Run predicting
 
