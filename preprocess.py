@@ -1,6 +1,3 @@
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
-
 import esm
 import pathlib
 import numpy as np
@@ -93,10 +90,10 @@ def get_contact():
                 for j in range(max_length):
                     contact[i][j]=model_pth[i][j]
         pr_name = pr[:-2]
-        path = contact_path + pr_name + "npy"  # pr是name.pt 去掉pt
+        path = contact_path + pr_name + "npy" 
         np.save(path, contact)
 
 if __name__ == '__main__':
-    input_fasta = './data/3E1H.fasta'
+    input_fasta = './data/pepvae.fasta'
     get_embedding_esm(input_fasta)
     get_contact()
