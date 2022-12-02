@@ -17,6 +17,6 @@ for seq_record in SeqIO.parse(seq, "fasta"):
     sequence.append(str(seq_record.seq))
     i=1+i
     label.append(int(i))
-    # print(sequence)
-    df = pd.DataFrame(data={'Name': name, 'SequenceID': sequence,'Label':label})
-    df.to_csv(output, sep=' ', index=False, header=False)
+
+df = pd.DataFrame(data={'Name': name, 'SequenceID': sequence,'Label':label})
+df.to_csv(output, sep=' ', index=False, header=False)
