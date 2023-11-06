@@ -1,22 +1,18 @@
 # AMPredictor
 
 Antimicrobial peptide (AMP) activity prediction
-
+* Online server: [click here](https://huggingface.co/spaces/ruihan-dong/AMPredictor)  (please submit one peptide sequence < 60 AAs at a time)
+![image](https://github.com/ruihan-dong/AMPredictor/blob/main/AMPredictor_framework.png)
 
 
 ## Dependencies
 
-Python 3
-
-PyTorch
-
-PyG
-
-RDKit
-
-ESM
-
-sklearn
+* Python3
+* PyTorch
+* PyG
+* RDKit
+* ESM
+* sklearn
 
 
 
@@ -24,8 +20,8 @@ sklearn
 
 ### 01 Prepare input files (./input/)
 
-* input.fasta   # the fasta file of input peptide sequences
-* input.txt   # name/sequence/label, the label can be any number when predicting unknown MICs
+* input.fasta   (the fasta file of input peptide sequences)
+* input.txt     (name/sequence/label, the label can be any number when predicting unknown MICs)
 
 Please carefully check that the name of each sequence in input.fasta is consistent with which in input.txt, otherwise the predicted results will be wrong.
 
