@@ -82,3 +82,17 @@ Metrics including RMSE, MSE, Pearson, Spearman and CI will be printed.
 
 [DGraphDTA](https://github.com/595693085/DGraphDTA), [SummaryDTA](https://github.com/PuYuQian/SummaryDTA), [PepVAE](https://www.frontiersin.org/articles/10.3389/fmicb.2021.725727/full), [Peptimizer](https://github.com/learningmatter-mit/peptimizer)
 
+
+## To cite
+```
+@article{Dong2024.02.23.581845,
+  author = {Ruihan Dong and Rongrong Liu and Ziyu Liu and Yangang Liu and Gaomei Zhao and Honglei Li and Shiyuan Hou and Xiaohan Ma and Huarui Kang and Jing Liu and Fei Guo and Ping Zhao and Junping Wang and Cheng Wang and Xingan Wu and Sheng Ye and Cheng Zhu},
+  title = {Exploring the repository of de novo designed bifunctional antimicrobial peptides through deep learning},
+  elocation-id = {2024.02.23.581845},
+  year = {2024},
+  doi = {10.1101/2024.02.23.581845},
+  publisher = {Cold Spring Harbor Laboratory},
+  URL = {https://www.biorxiv.org/content/early/2024/02/24/2024.02.23.581845},
+  journal = {bioRxiv}
+}
+```
