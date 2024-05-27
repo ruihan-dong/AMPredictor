@@ -1,0 +1,9 @@
+# python 3.11.9
+torch_geometric
+rdkit
+fair-esm
+scikit-learn
+torch
+matplotlib
+pandas
+biopython
