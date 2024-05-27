@@ -1,6 +1,8 @@
 import matplotlib
 from argparse import ArgumentParser
 
+import pandas as pd
+
 matplotlib.use("Agg")
 
 import os
@@ -38,6 +40,7 @@ def load_model(model_path):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument("input", help="path to dataset")
+    parser.add_argument("output", help="path to outputfile")
     args = parser.parse_args()
 
     model_st = GNNPredictor.__name__
@@ -57,6 +60,8 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=TEST_BATCH_SIZE, shuffle=False, collate_fn=collate)
 
     Y, P = predicting(model, device, test_loader)
-    print("Predicted logMIC values:", P)
-    output = np.array([P]).transpose()
-    np.savetxt('output.csv', output, delimiter=',')
+    P_pow_10 = np.array([10 ** x for x in P])
+    P_thrs = np.array(["AMP" if x <= 32 else "non-AMP" for x in P_pow_10])
+    output_df = pd.DataFrame({"Prediction": P_thrs})
+    output_df.to_csv(args.output, index=False, sep="\t")
+    print("Done")
