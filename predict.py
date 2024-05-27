@@ -7,14 +7,15 @@ matplotlib.use("Agg")
 
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 import torch
 import numpy as np
 
 from AMPredictor import *
 from utils import *
-
+from preprocess import get_embedding_esm, get_contact
+from input import fasta2txt
 
 def predicting(model, device, loader):
     model.eval()
@@ -39,9 +40,18 @@ def load_model(model_path):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument("input", help="path to dataset")
+    parser.add_argument("input", type=str, help="path to dataset")
     parser.add_argument("output", help="path to outputfile")
     args = parser.parse_args()
+    input_fasta = args.input
+    input_dataset = input_fasta.replace(".fasta", ".txt")
+
+    # generate dataset
+    fasta2txt.convert(input_fasta, input_dataset)
+
+    # preprocess
+    get_embedding_esm(input_fasta)
+    get_contact()
 
     model_st = GNNPredictor.__name__
 
@@ -50,13 +60,14 @@ if __name__ == '__main__':
     results_dir = 'results'
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(device)
     model_file_name = 'models/model_' + model_st + '_.model'
     result_file_name = 'results/result_' + model_st + '.txt'
 
     model = GNNPredictor()
     model.to(device)
     model.load_state_dict(torch.load(model_file_name, map_location=device))
-    test_data = load_dataset(test_flag=True, filepath=args.input)
+    test_data = load_dataset(test_flag=True, filepath=input_dataset)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=TEST_BATCH_SIZE, shuffle=False, collate_fn=collate)
 
     Y, P = predicting(model, device, test_loader)
