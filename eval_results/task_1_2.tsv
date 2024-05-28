@@ -1,0 +1,11 @@
+name	tn	fp	fn	tp	acc	fpr	tpr
+eval_results/eval_data/dbaasp/activity/moi/strain/escherichiacoliatcc25922_	292	182	263	1348	0.7865707434052758	0.38396624472573837	0.8367473618870267
+eval_results/eval_data/data/dbaasp/activity/	546	248	745	3186	0.7898412698412698	0.3123425692695214	0.8104807936911728
+eval_results/eval_data/dbaasp/activity/moi/species/staphylococcusaureus_	486	591	478	1797	0.6810859188544153	0.5487465181058496	0.7898901098901099
+eval_results/eval_data/data/dbaasp/activity/moi/strain/staphylococcusaureusatcc25923_	155	243	189	799	0.6883116883116883	0.6105527638190955	0.8087044534412956
+eval_results/eval_data/dbaasp/activity/moi/species/escherichiacoli_	627	331	352	2350	0.8133879781420765	0.3455114822546973	0.8697261287934863
+eval_results/eval_data/data/dbaasp/activity/moi/species/staphylococcusaureus_	486	591	478	1797	0.6810859188544153	0.5487465181058496	0.7898901098901099
+eval_results/eval_data/dbaasp/activity/	546	248	745	3186	0.7898412698412698	0.3123425692695214	0.8104807936911728
+eval_results/eval_data/data/dbaasp/activity/moi/strain/escherichiacoliatcc25922_	292	182	263	1348	0.7865707434052758	0.38396624472573837	0.8367473618870267
+eval_results/eval_data/dbaasp/activity/moi/strain/staphylococcusaureusatcc25923_	155	243	189	799	0.6883116883116883	0.6105527638190955	0.8087044534412956
+eval_results/eval_data/data/dbaasp/activity/moi/species/escherichiacoli_	627	331	352	2350	0.8133879781420765	0.3455114822546973	0.8697261287934863

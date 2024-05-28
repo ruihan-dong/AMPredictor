@@ -1,9 +1,10 @@
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import esm
 import pathlib
 import numpy as np
 import torch
+from argparse import ArgumentParser
 
 # sequence embedding from pre-trained ESM-1b
 def get_embedding_esm(input_fasta):
@@ -66,6 +67,11 @@ def get_contact():
     path_raw= "./data/raw/"
     contact_path = "./data/contact_65/"
     esm_path = "./data/embedding_65/"
+
+    for path in [path_raw, contact_path, esm_path]:
+        if not os.path.exists(path):
+            os.makedirs(path)
+
     sample_list = os.listdir(path_raw)
     for pr in sample_list:
         path = path_raw + pr
@@ -96,6 +102,8 @@ def get_contact():
         np.save(path, contact)
 
 if __name__ == '__main__':
-    input_fasta = './data/pepvae.fasta'
-    get_embedding_esm(input_fasta)
+    parser = ArgumentParser()
+    parser.add_argument("-i" , "--input", required=True)
+    args = parser.parse_args()
+    get_embedding_esm(args.input)
     get_contact()

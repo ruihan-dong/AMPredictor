@@ -8,10 +8,11 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import GCNConv, GATConv, global_mean_pool
+from torch_geometric.nn import GCNConv, global_mean_pool
 from rdkit.Chem import AllChem as Chem
 
 from utils import *
+
 
 # peptide graph encoding
 # to judge whether the required files exist
@@ -25,6 +26,7 @@ def valid_peptide(name):
     else:
         return False
 
+
 # node feature from esm embedding
 def peptide_to_feature(peptide_name):
     embedding_path = './data/embedding_65/'
@@ -35,6 +37,7 @@ def peptide_to_feature(peptide_name):
     # feature = torch.mean(feature, dim=1, keepdim=False) # 有无在此处压缩的必要？
     # print("peptide feature: ", feature.shape)
     return feature, size
+
 
 # with contact as edge, convert a peptide to a graph
 def peptide_to_graph(peptide_name):
@@ -50,6 +53,7 @@ def peptide_to_graph(peptide_name):
     edge_index = np.array(edge_index)
     return peptide_size, node_feature, edge_index
 
+
 # RDkit encoding amino acid fingerprint
 # input: sequences
 def fingerprint_feature(seqs):
@@ -63,19 +67,20 @@ def fingerprint_feature(seqs):
 
         for key, value in smiles.items():
             mol = Chem.MolFromSmiles(value)
-            fp = np.array(Chem.GetMorganFingerprintAsBitVect(mol, radius=3, nBits=2048)) # 需要参考指定此二参数
+            fp = np.array(Chem.GetMorganFingerprintAsBitVect(mol, radius=3, nBits=2048))  # 需要参考指定此二参数
             lookupfps[key] = fp
         lookupfps[' '] = np.zeros(lookupfps['A'].shape, dtype=int)
         lookupfps['0'] = np.zeros(lookupfps['A'].shape, dtype=int)
 
         fp = np.asarray([lookupfps[seq[i]] for i in range(len(seq))])
         n_rows = seq_max - len(seq)
-        shape_padding = (n_rows, 2048) # nbits from Morgan fp
+        shape_padding = (n_rows, 2048)  # nbits from Morgan fp
         padding_array = np.zeros(shape_padding)
-        fingerprint = np.concatenate((fp, padding_array), axis = 0)
-        fingerprint = np.mean(fingerprint, axis=1) # pool to 1d vector
+        fingerprint = np.concatenate((fp, padding_array), axis=0)
+        fingerprint = np.mean(fingerprint, axis=1)  # pool to 1d vector
         fp_list.append(fingerprint)
     return np.array(fp_list)
+
 
 # GCN layer + full-connected regressor model
 class GNNPredictor(torch.nn.Module):
@@ -136,6 +141,7 @@ class GNNPredictor(torch.nn.Module):
         out = self.out(xc)
         return out
 
+
 # data.csv: No./seq/MIC
 def read_dataset(path):
     try:
@@ -153,7 +159,8 @@ def read_dataset(path):
     file.close()
     return np.array(target_keys), X_seq, np.array(y)
 
-def load_dataset(test_flag=False):
+
+def load_dataset(test_flag=False, filepath=None):
     # create target graph
     def create_graph(target_key):
         target_graph = {}
@@ -171,20 +178,23 @@ def load_dataset(test_flag=False):
         train_graph = create_graph(train_prot_keys)
         train_fp = fingerprint_feature(train_prot_seqs)
         train_dataset = DTADataset(root='data', dataset='train', target_key=train_prot_keys,
-                                y=train_y, target_graph=train_graph, fingerprint=train_fp)
-        
+                                   y=train_y, target_graph=train_graph, fingerprint=train_fp)
+
         # valid dataset
         valid_prot_keys, valid_prot_seqs, valid_y = read_dataset('./data/valid.txt')
         valid_graph = create_graph(valid_prot_keys)
         valid_fp = fingerprint_feature(valid_prot_seqs)
         valid_dataset = DTADataset(root='data', dataset='valid', target_key=valid_prot_keys,
-                                y=valid_y, target_graph=valid_graph, fingerprint=valid_fp)
+                                   y=valid_y, target_graph=valid_graph, fingerprint=valid_fp)
         return train_dataset, valid_dataset
     else:
         # test dataset
-        test_prot_keys, test_prot_seqs, test_y = read_dataset('./data/test.txt')
+        if filepath is None:
+            test_prot_keys, test_prot_seqs, test_y = read_dataset('./data/test.txt')
+        else:
+            test_prot_keys, test_prot_seqs, test_y = read_dataset(filepath)
         test_graph = create_graph(test_prot_keys)
         test_fp = fingerprint_feature(test_prot_seqs)
         test_dataset = DTADataset(root='data', dataset='test', target_key=test_prot_keys,
-                                y=test_y, target_graph=test_graph, fingerprint=test_fp)
+                                  y=test_y, target_graph=test_graph, fingerprint=test_fp)
         return test_dataset

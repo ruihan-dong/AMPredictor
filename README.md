@@ -1,5 +1,16 @@
 # AMPredictor
 
+preprocess and inference
+```shell
+python predict.py sample.fasta sample.fasta.tsv
+```
+
+**environment**
+- python 3.11.9
+- requirements.txt
+
+## Old readme
+
 Antimicrobial peptide (AMP) activity prediction
 * Online server: [click here](https://huggingface.co/spaces/ruihan-dong/AMPredictor)  (please submit one peptide sequence < 60 AAs at a time)
 ![image](https://github.com/ruihan-dong/AMPredictor/blob/main/AMPredictor_framework.png)
