@@ -73,6 +73,6 @@ if __name__ == '__main__':
     Y, P = predicting(model, device, test_loader)
     P_pow_10 = np.array([10 ** x for x in P])
     P_thrs = np.array(["AMP" if x <= 32 else "non-AMP" for x in P_pow_10])
-    output_df = pd.DataFrame({"Prediction": P_thrs})
+    output_df = pd.DataFrame({"Prediction": P_thrs, "MIC": P_pow_10})
     output_df.to_csv(args.output, index=False, sep="\t")
     print("Done")
