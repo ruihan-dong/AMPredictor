@@ -85,14 +85,16 @@ Metrics including RMSE, MSE, Pearson, Spearman and CI will be printed.
 
 ## To cite
 ```
-@article{Dong2024.02.23.581845,
-  author = {Ruihan Dong and Rongrong Liu and Ziyu Liu and Yangang Liu and Gaomei Zhao and Honglei Li and Shiyuan Hou and Xiaohan Ma and Huarui Kang and Jing Liu and Fei Guo and Ping Zhao and Junping Wang and Cheng Wang and Xingan Wu and Sheng Ye and Cheng Zhu},
-  title = {Exploring the repository of de novo designed bifunctional antimicrobial peptides through deep learning},
-  elocation-id = {2024.02.23.581845},
-  year = {2024},
-  doi = {10.1101/2024.02.23.581845},
-  publisher = {Cold Spring Harbor Laboratory},
-  URL = {https://www.biorxiv.org/content/early/2024/02/24/2024.02.23.581845},
-  journal = {bioRxiv}
+@article{Dong_elife_2024, 
+    title = {Exploring the repository of de novo designed bifunctional antimicrobial peptides through deep learning}, 
+    url = {http://dx.doi.org/10.7554/eLife.97330.1}, 
+    DOI = {10.7554/elife.97330.1}, 
+    publisher = {eLife Sciences Publications, Ltd}, 
+    author = {Dong, Ruihan and Liu, Rongrong and Liu, Ziyu and Liu, Yangang and Zhao, Gaomei and Li, Honglei and Hou, Shiyuan and Ma, Xiaohan and Kang, Huarui and Liu, Jing and Guo, Fei and Zhao, Ping and Wang, Junping and Wang, Cheng and Wu, Xingan and Ye, Sheng and Zhu, Cheng}, 
+    year = {2024}, 
+    volume = {13},
+    pages = {RP97330},
+    month = may, 
+    journal = {eLife}
 }
 ```
